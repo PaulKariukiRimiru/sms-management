@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
 
 const Schema = mongoose.Schema;
 
@@ -12,3 +13,5 @@ export const ContactSchema = new Schema({
     required: 'Provide a phone number',
   },
 });
+
+ContactSchema.plugin(uniqueValidator);

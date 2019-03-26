@@ -2,6 +2,7 @@ import { left, right } from 'fp-ts/lib/Either';
 import * as mongoose from 'mongoose';
 
 import { ContactSchema } from 'src/models/Contact';
+import { deleteSms } from '../Sms';
 
 import { ContactCreateDetails, ContactUpdateDetails } from './interface';
 
@@ -56,10 +57,7 @@ export const deleteContact = async (id: string) => {
     .then((contact: any | null) => {
       if (contact) {
 
-        return right({
-          message: 'contact has been deleted',
-          data: contact,
-        });
+        return deleteSms(id);
       }
 
       return left({
