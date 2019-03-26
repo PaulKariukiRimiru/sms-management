@@ -1,5 +1,7 @@
+import { assert } from "chai";
+
 describe('Sanity test', () => {
   it('passes', () => {
-    expect(true).toBeTruthy();
+    assert.isTrue(true);
   });
 });

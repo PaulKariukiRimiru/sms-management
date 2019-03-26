@@ -11,6 +11,9 @@ export const ContactSchema = new Schema({
   phonenumber: {
     type: String,
     required: 'Provide a phone number',
+    match: [/^[0-9]*$/, 'Provide a valid phone number'],
+    minlength: [9, 'Provide a valid phone number'],
+    maxlength: [13, 'Provide a valid phone number'],
   },
 });
 
