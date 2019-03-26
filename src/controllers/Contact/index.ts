@@ -9,6 +9,12 @@ import { ContactCreateDetails, ContactUpdateDetails } from './interface';
 
 const createContactModel = () => mongoose.model('Contact', ContactSchema);
 
+/**
+ * Controller to create a contact
+ *
+ * @param  {ContactCreateDetails} contactDetails
+ * @return Promise<Either<any, {}>>
+ */
 export const createContact = async (contactDetails: ContactCreateDetails) =>  {
   const contactModel = createContactModel();
 
@@ -27,6 +33,13 @@ export const createContact = async (contactDetails: ContactCreateDetails) =>  {
     .catch((err) => left(err));
 };
 
+/**
+ * Controller to update a contact
+ *
+ * @param  {string} id
+ * @param  {ContactUpdateDetails} contactDetails
+ * @return Promise<Either<any, {}>>
+ */
 export const updateContact = async (id: string, contactDetails: ContactUpdateDetails) => {
   const contactModel = createContactModel();
 
@@ -50,6 +63,12 @@ export const updateContact = async (id: string, contactDetails: ContactUpdateDet
     .catch((err) => left(err));
 };
 
+/**
+ * Controller to delete a contact
+ *
+ * @param  {string} id
+ * @return Promise<Either<any, {}>>
+ */
 export const deleteContact = async (id: string) => {
   const contactModel = createContactModel();
 
@@ -67,6 +86,12 @@ export const deleteContact = async (id: string) => {
     .catch((err) => left(err));
 };
 
+/**
+ * Controller to fetch contacts
+ *
+ * @param  {string} id
+ * @return Promise<Either<any, {}>>
+ */
 export const getContact = async (id: string) => {
   const contactModel = createContactModel();
 

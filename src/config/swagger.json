@@ -1,61 +1,358 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0"
+    "description": "This is the documentation for sms manager application",
+    "version": "1.0.0",
+    "title": "Swagger sms manager"
   },
   "host": "localhost:3000",
   "basePath": "/api/v1",
   "schemes": ["http"],
   "produces": ["application/json"],
-  "paths": {
-    "/": {
-      "get": {
-        "tags": ["Hello World"],
-        "summary": "says hello world",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "internal server error"
-          }
-        },
-        "content": {
-          "application/json": {}
-        },
-        "parameters": []
-      }
+  "tags": [
+    {
+      "name": "contact",
+      "description": "Access to Contact"
     },
-    "/user": {
+    {
+      "name": "sms",
+      "description": "Access to Sms"
+    }
+  ],
+  "paths": {
+    "/contact": {
       "post": {
-        "tags": ["Save user"],
-        "summary": "saves a user",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "internal server error"
-          }
-        },
-        "content": {
-          "application/json": {}
-        },
+        "tags": [
+          "contact"
+        ],
+        "summary": "Add a new contact",
+        "description": "",
+        "operationId": "addContact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "name",
             "in": "body",
-            "description": "The user name",
+            "name": "body",
+            "description": "Contact needs to be stored",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "Update an existing Contact",
+        "description": "",
+        "operationId": "updateContact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "contact id",
+            "required": true,
+            "type": "string",
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Contact should be an existing contact",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Contact not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "Finds contacts by id",
+        "description": "Provide Id for an existing contact or remove all query parameters to fetch all contacts",
+        "operationId": "findContactById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "contact id",
+            "required": false,
+            "type": "string",
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "Deletes a contact",
+        "description": "",
+        "operationId": "deleteContact",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "contact id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "contact not found"
+          }
+        }
+      }
+    },
+    "/sms": {
+      "post": {
+        "tags": [
+          "sms"
+        ],
+        "summary": "Send new sms",
+        "description": "",
+        "operationId": "createSms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Sms to be sent",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sms"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "sms"
+        ],
+        "summary": "Update an existing sms status",
+        "description": "",
+        "operationId": "updateSms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "sms id",
+            "required": false,
+            "type": "string",
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Contact not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "sms"
+        ],
+        "summary": "Finds sms by contact id",
+        "description": "",
+        "operationId": "getSms",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "contact id",
+            "required": false,
+            "type": "string",
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "format": "int64"
+        },
+        "phonenumber": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "Sms": {
+      "type": "object",
+      "properties": {
+        "receiver": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sender": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            }
+          }
+        }
       }
     }
   }

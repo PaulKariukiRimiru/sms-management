@@ -6,6 +6,12 @@ import { SmsCreateDetails } from './interfaces';
 
 const createContactModel = () => mongoose.model('Sms', SmsSchema);
 
+/**
+ * Controller to create an sms
+ *
+ * @param  {SmsCreateDetails} contactDetails
+ * @return Promise<Either<any, {}>>
+ */
 export const createSms = async (contactDetails: SmsCreateDetails) =>  {
   const smsModel = createContactModel();
 
@@ -24,6 +30,12 @@ export const createSms = async (contactDetails: SmsCreateDetails) =>  {
     .catch((err) => left(err));
 };
 
+/**
+ * Controller to fetch sms for a particular account
+ *
+ * @param  {string} id
+ * @return Promise<Either<any, {}>>
+ */
 export const getSms = async (id: string) =>  {
   const smsModel = createContactModel();
 
@@ -40,6 +52,12 @@ export const getSms = async (id: string) =>  {
     .catch((err) => left(err));
 };
 
+/**
+ * Controller to delete sms
+ *
+ * @param  {string} sender
+ * @return Promise<Either<any, {}>>
+ */
 export const deleteSms = async (sender: string) =>  {
   const smsModel = createContactModel();
 
@@ -60,6 +78,12 @@ export const deleteSms = async (sender: string) =>  {
     .catch((err) => left(err));
 };
 
+/**
+ * Controller to update the status of an sms
+ *
+ * @param  {string} id
+ * @return Promise<Either<any, {}>>
+ */
 export const updateSmsStatus = async (id: string) =>  {
   const smsModel = createContactModel();
 
