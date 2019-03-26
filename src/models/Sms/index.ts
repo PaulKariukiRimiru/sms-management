@@ -6,6 +6,7 @@ export const SmsSchema = new Schema({
   sender: {
     type: Schema.Types.ObjectId,
     ref: 'Contact',
+    required: true,
   },
   receiver: {
     type: Schema.Types.ObjectId,
@@ -17,5 +18,6 @@ export const SmsSchema = new Schema({
   },
   status: {
     type: Boolean,
+    default: false,
   },
 });
