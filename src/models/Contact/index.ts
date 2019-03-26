@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 export const ContactSchema = new Schema({
   name: {
     type: String,
-    required: 'Provide a receiver address',
+    required: 'Provide a contact name',
   },
   phonenumber: {
     type: String,
-    required: 'Provide a sender address',
+    required: 'Provide a phone number',
   },
 });
