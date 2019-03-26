@@ -1,5 +1,5 @@
-import helloRoutes from './hello/routes';
+import contact from 'src/modules/contact/routes';
 
-const routes = [helloRoutes];
+const routes = [contact];
 
 export default routes.reduce((allRoutes, moduleRoutes) => allRoutes.concat(moduleRoutes));
