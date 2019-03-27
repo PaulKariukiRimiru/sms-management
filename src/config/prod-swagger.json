@@ -5,9 +5,9 @@
     "version": "1.0.0",
     "title": "Swagger sms manager"
   },
-  "host": ["localhost:3000", "https://my-population-manager.herokuapp.com"],
+  "host": "my-sms-manager.herokuapp.com",
   "basePath": "/api/v1",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "produces": ["application/json"],
   "tags": [
     {
@@ -152,7 +152,7 @@
         "tags": [
           "contact"
         ],
-        "summary": "Deletes a contact",
+        "summary": "Delete a contact",
         "description": "",
         "operationId": "deleteContact",
         "produces": [
@@ -161,7 +161,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "string",
+            "in": "query",
             "description": "contact id to delete",
             "required": true,
             "type": "string"
