@@ -4,6 +4,8 @@
   "main": "src/server.ts",
   "scripts": {
     "postinstall": "tsc",
+    "start": "pm2 start pm2.yaml",
+    "stop": "pm2 stop pm2.yaml",
     "start:dev": "ts-node --files -T --project ./tsconfig.json -r tsconfig-paths/register src/server.ts",
     "start:dev:watch": "NODE_ENV=development nodemon",
     "base:test": "NODE_ENV=test nyc --reporter=text-lcov mocha --require tsconfig-paths/register --require ts-node/register",
