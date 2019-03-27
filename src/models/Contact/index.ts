@@ -7,6 +7,7 @@ export const ContactSchema = new Schema({
   name: {
     type: String,
     required: 'Provide a contact name',
+    match: [/^[a-zA-Z]/, 'provide a valid namw'],
   },
   phonenumber: {
     type: String,
