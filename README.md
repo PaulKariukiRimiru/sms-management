@@ -4,6 +4,10 @@
 
 This is a social application that users can send and receive sms
 
+### Application Documentation
+
+You can try out the application [here](https://my-sms-manager.herokuapp.com/api-docs/)
+
 ## Getting Started
 
 To start development
