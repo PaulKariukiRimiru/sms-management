@@ -4,7 +4,7 @@ import { SmsSchema } from 'src/models/Sms';
 import { left, right } from 'fp-ts/lib/Either';
 import { SmsCreateDetails } from './interfaces';
 
-const createContactModel = () => mongoose.model('Sms', SmsSchema);
+export const createSmsModel = () => mongoose.model('Sms', SmsSchema);
 
 /**
  * Controller to create an sms
@@ -13,7 +13,7 @@ const createContactModel = () => mongoose.model('Sms', SmsSchema);
  * @return Promise<Either<any, {}>>
  */
 export const createSms = async (contactDetails: SmsCreateDetails) =>  {
-  const smsModel = createContactModel();
+  const smsModel = createSmsModel();
 
   const newSms = new smsModel(contactDetails);
 
@@ -37,7 +37,7 @@ export const createSms = async (contactDetails: SmsCreateDetails) =>  {
  * @return Promise<Either<any, {}>>
  */
 export const getSms = async (id: string) =>  {
-  const smsModel = createContactModel();
+  const smsModel = createSmsModel();
 
   return await smsModel.find({ $or: [{ sender: id }, { receiver: id} ] })
     .then((sms: any | null) => {
@@ -59,7 +59,7 @@ export const getSms = async (id: string) =>  {
  * @return Promise<Either<any, {}>>
  */
 export const deleteSms = async (sender: string) =>  {
-  const smsModel = createContactModel();
+  const smsModel = createSmsModel();
 
   return await smsModel.deleteMany({ sender })
     .then((status) => {
@@ -85,7 +85,7 @@ export const deleteSms = async (sender: string) =>  {
  * @return Promise<Either<any, {}>>
  */
 export const updateSmsStatus = async (id: string) =>  {
-  const smsModel = createContactModel();
+  const smsModel = createSmsModel();
 
   return await smsModel.findOneAndUpdate({ _id: id }, { status: true })
     .then((sms: any | null) => {

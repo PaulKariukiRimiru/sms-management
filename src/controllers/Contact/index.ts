@@ -7,7 +7,7 @@ import { deleteSms } from '../Sms';
 import { ContactCreateDetails, ContactUpdateDetails } from './interface';
 
 
-const createContactModel = () => mongoose.model('Contact', ContactSchema);
+export const createContactModel = () => mongoose.model('Contact', ContactSchema);
 
 /**
  * Controller to create a contact
@@ -43,21 +43,14 @@ export const createContact = async (contactDetails: ContactCreateDetails) =>  {
 export const updateContact = async (id: string, contactDetails: ContactUpdateDetails) => {
   const contactModel = createContactModel();
 
-  return contactModel.findById(id)
-    .then(async (contact: any | null) => {
+  return contactModel.findOneAndUpdate({ _id: id }, contactDetails, { runValidators: true })
+    .then((contact: any | null) => {
       if (contact) {
-        Object.assign(contact, contactDetails);
-
-        contact.save();
-
-        return right({
-          message: 'contact has been updated',
-          data: contact,
-        });
+        return right(contact);
       }
 
       return left({
-        message: 'contact not found',
+        message: 'contact was not found',
       });
     })
     .catch((err) => left(err));
