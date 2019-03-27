@@ -11,6 +11,7 @@ export const ContactSchema = new Schema({
   },
   phonenumber: {
     type: String,
+    unique: 'Please ensure that the phone number is unique',
     required: 'Provide a phone number',
     match: [/^[0-9]*$/, 'Provide a valid phone number'],
     minlength: [9, 'Provide a valid phone number'],

@@ -43,7 +43,11 @@ export const createContact = async (contactDetails: ContactCreateDetails) =>  {
 export const updateContact = async (id: string, contactDetails: ContactUpdateDetails) => {
   const contactModel = createContactModel();
 
-  return contactModel.findOneAndUpdate({ _id: id }, contactDetails, { runValidators: true })
+  return contactModel.findOneAndUpdate(
+    { _id: id },
+    contactDetails,
+    { runValidators: true, new: true, context: 'query' }
+  )
     .then((contact: any | null) => {
       if (contact) {
         return right(contact);

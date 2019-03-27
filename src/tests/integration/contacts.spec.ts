@@ -115,12 +115,11 @@ describe('The Contacts', () => {
 
       const sampleContact = {
         name: 'test update',
-        phonenumber: '0722999999',
+        phonenumber: '0722999993',
       };
 
       return request(app)
-        .put('/api/v1/contact')
-        .query({ id: contacts[0] })
+        .put(`/api/v1/contact/?id=${contacts[0]}`)
         .send(sampleContact)
         .set('Accept', 'application/json')
         .expect(200)

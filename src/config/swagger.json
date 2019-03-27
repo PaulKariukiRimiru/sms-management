@@ -161,11 +161,10 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "string",
             "description": "contact id to delete",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
